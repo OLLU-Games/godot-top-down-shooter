@@ -1,0 +1,86 @@
+[gd_scene load_steps=6 format=3 uid="uid://b0bxjt55njxxg"]
+
+[ext_resource type="Script" path="res://level.gd" id="1_t30kn"]
+[ext_resource type="PackedScene" uid="uid://bu4bwm7xxt3pt" path="res://player.tscn" id="1_xmj5j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hqy52"]
+size = Vector2(10, 720)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3l5fa"]
+size = Vector2(10, 1260)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pu6co"]
+size = Vector2(31, 153)
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_t30kn")
+
+[node name="Player" parent="." instance=ExtResource("1_xmj5j")]
+position = Vector2(601, 347)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+ignore_rotation = false
+zoom = Vector2(1.25, 1.25)
+position_smoothing_enabled = true
+
+[node name="Outer_Walls" type="StaticBody2D" parent="."]
+
+[node name="Line2D" type="Line2D" parent="Outer_Walls"]
+position = Vector2(-62, -15)
+scale = Vector2(4, 1)
+points = PackedVector2Array(13, 15, 13, 735)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Outer_Walls"]
+position = Vector2(-40, 360)
+scale = Vector2(10, 1)
+shape = SubResource("RectangleShape2D_hqy52")
+
+[node name="Line2D2" type="Line2D" parent="Outer_Walls"]
+position = Vector2(1238, -15)
+scale = Vector2(4, 1)
+points = PackedVector2Array(13, 15, 13, 735)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Outer_Walls"]
+position = Vector2(1320, 360)
+scale = Vector2(10, 1)
+shape = SubResource("RectangleShape2D_hqy52")
+
+[node name="Line2D3" type="Line2D" parent="Outer_Walls"]
+position = Vector2(745, -32)
+rotation = 1.5708
+scale = Vector2(4, 1)
+points = PackedVector2Array(13, -525, 13, 735)
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Outer_Walls"]
+position = Vector2(640, -10)
+rotation = 1.5708
+scale = Vector2(10, 1)
+shape = SubResource("RectangleShape2D_3l5fa")
+
+[node name="Line2D4" type="Line2D" parent="Outer_Walls"]
+position = Vector2(745, 648)
+rotation = 1.5708
+scale = Vector2(4, 1)
+points = PackedVector2Array(13, -525, 13, 735)
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Outer_Walls"]
+position = Vector2(640, 730)
+rotation = 1.5708
+scale = Vector2(10, 1)
+shape = SubResource("RectangleShape2D_3l5fa")
+
+[node name="Inner_Walls" type="StaticBody2D" parent="."]
+position = Vector2(158, 166)
+
+[node name="Line2D" type="Line2D" parent="Inner_Walls"]
+position = Vector2(-206.8, -58.2)
+scale = Vector2(3.2, 1.3)
+points = PackedVector2Array(104, 204, 104, 322)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Inner_Walls"]
+position = Vector2(126.5, 284)
+shape = SubResource("RectangleShape2D_pu6co")
+
+[node name="Bullets" type="Node2D" parent="."]
+
+[connection signal="shot" from="Player" to="." method="_on_player_shot"]

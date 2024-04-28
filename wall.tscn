@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://csqjenlded2iu"]
+
+[ext_resource type="Script" path="res://wall.gd" id="1_foiod"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ndl6i"]
+
+[node name="Wall" type="StaticBody2D"]
+script = ExtResource("1_foiod")
+
+[node name="Line2D" type="Line2D" parent="."]
+position = Vector2(150, 169)
+points = PackedVector2Array(59, -107, 59, 148)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-179, -66)
+shape = SubResource("RectangleShape2D_ndl6i")

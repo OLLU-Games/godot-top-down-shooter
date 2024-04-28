@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://bu4bwm7xxt3pt"]
+
+[ext_resource type="Script" path="res://Player.gd" id="1_hdbi2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_57i4a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pmdvp"]
+size = Vector2(12, 3)
+
+[node name="Player" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_hdbi2")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_57i4a")
+
+[node name="Aim_Line" type="Area2D" parent="."]
+
+[node name="Line2D" type="Line2D" parent="Aim_Line"]
+scale = Vector2(1, 0.3)
+points = PackedVector2Array(25, 0, 36, 0)
+
+[node name="Marker2D" type="Marker2D" parent="Aim_Line"]
+position = Vector2(36, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Aim_Line"]
+position = Vector2(31, 0)
+shape = SubResource("RectangleShape2D_pmdvp")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="area_entered" from="Aim_Line" to="." method="_on_aim_line_area_entered"]
+[connection signal="area_exited" from="Aim_Line" to="." method="_on_aim_line_area_exited"]
+[connection signal="body_entered" from="Aim_Line" to="." method="_on_aim_line_body_entered"]
+[connection signal="body_exited" from="Aim_Line" to="." method="_on_aim_line_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
